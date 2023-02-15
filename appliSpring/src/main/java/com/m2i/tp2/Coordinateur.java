@@ -25,13 +25,21 @@ public class Coordinateur {
 	//dont le nom logique est "interactionImplV1"
 	private Interaction interaction; //valeur par défaut = null;
 	
+	@...
+	private .... calculateur;
 	
 	public void enchainement() {
+		/*
 		//V1 : saisi + affichage
 		String valeurSaisieX = interaction.saisir("x:");
 		interaction.afficher("valeurSaisieX="+valeurSaisieX);
+		*/
 		
 		//V2 : saisi + calcul + affichage
+		String valeurSaisieX = interaction.saisir("x:");
+		double x= Double.parseDouble(valeurSaisieX);
+		double y = calculateur.calcul(x);
+		interaction.afficher("y="+y);
 	}
 	
 	public static void main(String[] args) {
