@@ -47,4 +47,12 @@ public class ConfigSpringExplicite {
 			   return new CalculateurDouble();
 		return null;
 	}
+	
+	@Bean
+	public CoordinateurV2 coordinateurV2(Calculateur calculateur, Interaction interaction) {
+		CoordinateurV2 coordinateurV2=new CoordinateurV2();
+		coordinateurV2.setInteraction(interaction);
+		coordinateurV2.setCalculateur(calculateur);
+		return coordinateurV2;
+	}
 }
