@@ -1,9 +1,8 @@
 package com.m2i.tp2;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -36,6 +35,22 @@ public class Coordinateur {
 	//@Resource(name=Calculateur.TP_CALCULATEUR_DOUBLE)
 	private Calculateur calculateur;//=null par defaut
 	
+	
+	
+	public Coordinateur() {
+		System.out.println("dans le constructeur de Coordinateur, calculateur="+calculateur);
+		//calculateur.... => nullPointerException
+	}
+	
+	@PostConstruct
+	//en java, une methode préfixée par @PostConstruct est appelée automatiquement
+	//après le constructeur et après toutes les injections de dépendances
+	//paramétrées par @Autowired ou @Resource ou autres
+	public void init() {
+		System.out.println("dans init() prefixee par @PostConstruct, calculateur="+calculateur);
+		//calculateur.... => pas de nullPointerException
+	}
+
 	public void enchainement() {
 		/*
 		//V1 : saisi + affichage
