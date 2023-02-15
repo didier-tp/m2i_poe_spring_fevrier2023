@@ -1,4 +1,4 @@
-package com.m2i.tp2;
+package com.m2i.tp3;
 
 public interface Calculateur {
 	static final String TP_CALCULATEUR_CARRE="calculateurCarreQueJaime";

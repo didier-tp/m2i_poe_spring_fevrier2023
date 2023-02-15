@@ -1,10 +1,8 @@
-package com.m2i.tp2;
+package com.m2i.tp3;
 
 import javax.swing.JOptionPane;
 
-import org.springframework.stereotype.Component;
 
-@Component // "interactionImplV2" = nom par défaut
 public class InteractionImplV2 implements Interaction {
 
 	@Override

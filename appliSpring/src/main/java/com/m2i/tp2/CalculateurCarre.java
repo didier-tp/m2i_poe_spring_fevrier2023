@@ -2,7 +2,8 @@ package com.m2i.tp2;
 
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component() //nom par defaut= NomClasse avec minuscule au debut = calculateurCarre
+@Component(Calculateur.TP_CALCULATEUR_CARRE)
 public class CalculateurCarre implements Calculateur {
 
 	@Override

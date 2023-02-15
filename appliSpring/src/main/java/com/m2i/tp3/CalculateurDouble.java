@@ -1,8 +1,5 @@
-package com.m2i.tp2;
+package com.m2i.tp3;
 
-import org.springframework.stereotype.Component;
-
-@Component(Calculateur.TP_CALCULATEUR_DOUBLE)
 public class CalculateurDouble implements Calculateur {
 
 	@Override
