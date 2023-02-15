@@ -25,8 +25,9 @@ public class Coordinateur {
 	//dont le nom logique est "interactionImplV1"
 	private Interaction interaction; //valeur par défaut = null;
 	
-	@...
-	private .... calculateur;
+	@Resource(name="calculateurCarre")
+	//@Resource(name="calculateurDouble")
+	private Calculateur calculateur;
 	
 	public void enchainement() {
 		/*
