@@ -4,7 +4,9 @@ import java.util.Scanner;
 
 import org.springframework.stereotype.Component;
 
-@Component
+@Component() //nom logique par défaut = NomClasse avec minuscule au début 
+             //= "interactionImplV1"
+//@Component("interactionImplV1") //idem avec nom par défaut explicité
 public class InteractionImplV1 implements Interaction {
 
 	@Override

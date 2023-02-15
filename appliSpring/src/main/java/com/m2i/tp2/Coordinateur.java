@@ -1,12 +1,14 @@
 package com.m2i.tp2;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component //pour demander à Spring de prendre en charge cette classe (new ... + ...) 
 public class Coordinateur {
 	
+	/*
 	@Autowired //injection de dépendance 
 	//pour demander à spring de remplacer la valeur null
 	//par une référence pointant vers un autre composant spring existant
@@ -14,6 +16,15 @@ public class Coordinateur {
 	private Interaction interaction; //valeur par défaut = null;
 	//interaction est une référence sur un composant implémentant
 	//l'interface Interaction , classes possibles: InteractionImplV1, InteractionImplV2
+	*/
+	
+	//@Resource sans (name="...") se comporte comme @Autowired
+	@Resource(name = "interactionImplV1")//injection de dépendance 
+	//pour demander à spring de remplacer la valeur null
+	//par une référence pointant vers un autre composant spring existant
+	//dont le nom logique est "interactionImplV1"
+	private Interaction interaction; //valeur par défaut = null;
+	
 	
 	public void enchainement() {
 		//V1 : saisi + affichage
@@ -27,7 +38,7 @@ public class Coordinateur {
 		/*
 		//V0 (sans spring)
 		Coordinateur coordinateur = new Coordinateur();
-		//coordinateur.interaction = new InteractionImplV1();
+		//coordinateur.interaction =  new InteractionImplV1();
 		coordinateur.interaction = new InteractionImplV2();
 		coordinateur.enchainement();
 		*/
