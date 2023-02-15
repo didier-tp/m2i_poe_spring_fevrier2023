@@ -2,6 +2,9 @@ package com.m2i.tp2;
 
 import java.util.Scanner;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class InteractionImplV1 implements Interaction {
 
 	@Override
