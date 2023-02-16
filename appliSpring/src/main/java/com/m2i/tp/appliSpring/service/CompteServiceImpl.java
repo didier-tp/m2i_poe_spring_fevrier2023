@@ -14,8 +14,8 @@ import com.m2i.tp.appliSpring.entity.Compte;
 @Service //@Service signifie @Component de type service métier 
 public class CompteServiceImpl implements ICompteService {
 	
-	@Resource(name="compteRepositorySimuImpl") //injection de dépendance
-	//@Resource(name="compteRepositoryJpaImpl")
+	//@Resource(name="compteRepositorySimuImpl") //injection de dépendance
+	@Resource(name="compteRepositoryJpaImpl")
 	private ICompteRepository compteRepository;//=null par defaut
 
 	@Override
