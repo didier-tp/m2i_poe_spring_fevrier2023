@@ -15,7 +15,10 @@ import com.m2i.tp.appliSpring.entity.Compte;
 public class CompteServiceImpl implements ICompteService {
 	
 	//@Resource(name="compteRepositorySimuImpl") //injection de dépendance
-	@Resource(name="compteRepositoryJpaImpl")
+	//@Resource(name="compteRepositoryJpaImpl")
+	//private ICompteRepositoryV1 compteRepository;//=null par defaut
+	
+	@Resource
 	private ICompteRepository compteRepository;//=null par defaut
 
 	@Override
@@ -25,7 +28,8 @@ public class CompteServiceImpl implements ICompteService {
 
 	@Override
 	public Compte findById(Integer id) {
-		return compteRepository.findById(id);
+		//return compteRepository.findById(id);//sans Optional<>
+		return compteRepository.findById(id).orElse(null);
 	}
 
 	@Override
