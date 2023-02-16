@@ -3,7 +3,7 @@ package com.m2i.tp.appliSpring;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication //@Configuration + @EnableAutoConfiguration + @ComponentScan(packege courant)
 public class AppliSpringApplication {
 
 	public static void main(String[] args) {
