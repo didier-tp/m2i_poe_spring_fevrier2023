@@ -3,6 +3,8 @@ package com.m2i.tp.appliSpring.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
@@ -23,6 +25,10 @@ public class CompteRepositoryJpaImpl implements ICompteRepository {
 	public Compte save(Compte cpt) {
 		if(cpt.getId()==null)
 		    entityManager.persist(cpt); //INSERT INTO
+		     //si dans la classe entity.Compte il y a 
+		     //@GeneratedValue(strategy = GenerationType.IDENTITY) 
+		     //à coté de @Id , la valeur de l'id auto incrémentée par H2 ou MySql
+		     //va automatiquement remonter en mémoire dans l'objet persistant
 		else
 			entityManager.merge(cpt); //UPDATE
 		return cpt; //on retourne le compte sauvegardé avec la clef primaire quelquefois auto incrémentée
