@@ -23,15 +23,23 @@ public class TestCompteRepository {
 	private ICompteRepository compteRepository;  //à tester
 	
 	
+	@Resource //injection de dépendance
+	private IClientRepository clientRepository;  //pour aider à tester
+	
+	
 	@Test
 	public void testDivers() {
-		Client c1 = new Client(null,"jean","Bon");
-		c1.setPrenom("luc");//.setPrenom() généré par lombok est ou pas compris par l'IDE
+		Client c1 = new Client(null,"luc","Bon");
+		c1.setPrenom("jean");//.setPrenom() généré par lombok est ou pas compris par l'IDE
+		clientRepository.save(c1);
 		
-		
-		compteRepository.save( new Compte(null,"compte_A",50.0) ); 
+		Compte cptA = new Compte(null,"compte_A",50.0);
+		cptA.setClient(c1);
+		compteRepository.save(cptA); 
 		compteRepository.save( new Compte(null,"my_account_B",150.0) ); 
-		compteRepository.save( new Compte(null,"compte_C",30.0) ); 
+		Compte cptC =new Compte(null,"compte_C",30.0);
+		cptC.setClient(c1);
+		compteRepository.save( cptC ); 
 		compteRepository.save( new Compte(null,"account_D",40.0) ); 
 		compteRepository.save( new Compte(null,"compte_E",60.0) ); 
 		
@@ -42,6 +50,10 @@ public class TestCompteRepository {
 	    List<Compte> comptesAvecLabelComportantAccount = compteRepository.findByLabelContaining("account");
 	    System.out.println("comptesAvecLabelComportantAccount: " + comptesAvecLabelComportantAccount);
 	    Assertions.assertTrue(comptesAvecLabelComportantAccount.size()>=2);
+	    
+	    List<Compte> comptesDuClient1 = compteRepository.findByClientId(c1.getId());
+	    System.out.println("comptesDuClient1="+comptesDuClient1);
+	    Assertions.assertTrue(comptesDuClient1.size()>=2);
 	}
 
 }

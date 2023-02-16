@@ -40,6 +40,9 @@ public interface ICompteRepository extends JpaRepository<Compte,Integer> {
 	//rechercher tous les comptes dont la partie label comporte une sous chaine
 	//passée en parametre .....Containing(String sousPartie).
 	List<Compte> findByLabelContaining(String sousPartie);
+	
+	//findBy + nomPropriete "client" dans classe Compte + proprieté "id" du sous objet client
+	List<Compte> findByClientId(Integer idclient);
 }
 
 /*
