@@ -41,7 +41,8 @@ public class CompteRepositoryJpaImpl implements ICompteRepository {
 
 	@Override
 	public List<Compte> findAll() {
-		return entityManager.createQuery("SELECT c FROM Compte c", Compte.class)
+		//return entityManager.createQuery("SELECT c FROM Compte c", Compte.class)
+		return entityManager.createNamedQuery("Compte.findAll", Compte.class)
 				.getResultList();
 	}
 
