@@ -36,6 +36,10 @@ public interface ICompteRepository extends JpaRepository<Compte,Integer> {
 	//findBy + nomPropriete "solde" dans classe Compte + "GreaterThanEqual"
 	//ce code du SELECT sera généré automatiquement
 	List<Compte> findBySoldeGreaterThanEqual(double soldeMini);
+	
+	//rechercher tous les comptes dont la partie label comporte une sous chaine
+	//passée en parametre .....Containing(String sousPartie).
+	List<Compte> findByLabelContaining(String sousPartie);
 }
 
 /*

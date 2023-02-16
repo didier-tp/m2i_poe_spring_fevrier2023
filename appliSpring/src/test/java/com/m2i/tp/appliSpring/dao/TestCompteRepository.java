@@ -25,14 +25,18 @@ public class TestCompteRepository {
 	@Test
 	public void testDivers() {
 		compteRepository.save( new Compte(null,"compte_A",50.0) ); 
-		compteRepository.save( new Compte(null,"compte_B",150.0) ); 
+		compteRepository.save( new Compte(null,"my_account_B",150.0) ); 
 		compteRepository.save( new Compte(null,"compte_C",30.0) ); 
-		compteRepository.save( new Compte(null,"compte_D",40.0) ); 
+		compteRepository.save( new Compte(null,"account_D",40.0) ); 
 		compteRepository.save( new Compte(null,"compte_E",60.0) ); 
 		
-		List<Compte> comptes = compteRepository.findBySoldeGreaterThanEqual(50.0);
-		System.out.println("comptes avec solde >= 50 : " + comptes);
-	    Assertions.assertTrue(comptes.size()>=3);
+		List<Compte> comptesAvecSoldeSuperieurA50 = compteRepository.findBySoldeGreaterThanEqual(50.0);
+		System.out.println("comptes avec solde >= 50 : " + comptesAvecSoldeSuperieurA50);
+	    Assertions.assertTrue(comptesAvecSoldeSuperieurA50.size()>=3);
+	    
+	    List<Compte> comptesAvecLabelComportantAccount = compteRepository.findByLabelContaining("account");
+	    System.out.println("comptesAvecLabelComportantAccount: " + comptesAvecLabelComportantAccount);
+	    Assertions.assertTrue(comptesAvecLabelComportantAccount.size()>=2);
 	}
 
 }
