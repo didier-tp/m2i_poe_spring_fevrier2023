@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.m2i.tp.appliSpring.entity.Compte;
 //@Component
 @Repository //@Repository signifie @Component de type "repository/DAO"
-public class CompteRepositorySimuImpl implements ICompteRepository {
+public class CompteRepositorySimuImpl implements ICompteRepositoryV1 {
 	
 	private Map<Integer,Compte> mapComptes = new HashMap<>();
 	private int maxId=0;//pour simuler auto_incr

@@ -14,7 +14,7 @@ import com.m2i.tp.appliSpring.entity.Compte;
 
 @Repository //ou @component
 @Transactional //pour commit/rollback automatiques
-public class CompteRepositoryJpaImpl implements ICompteRepository {
+public class CompteRepositoryJpaImpl implements ICompteRepositoryV1 {
 	
 	@PersistenceContext //pour initialiser le entityManager
 	//à partir du fichier META-INF/persistence.xml et de EntityManagerFactory
