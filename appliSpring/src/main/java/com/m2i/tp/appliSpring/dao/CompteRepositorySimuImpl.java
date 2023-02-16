@@ -4,8 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import com.m2i.tp.appliSpring.entity.Compte;
-//@...
+//@Component
+@Repository //@Repository signifie @Component de type "repository/DAO"
 public class CompteRepositorySimuImpl implements ICompteRepository {
 	
 	private Map<Integer,Compte> mapComptes = new HashMap<>();
