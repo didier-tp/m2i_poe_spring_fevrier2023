@@ -59,8 +59,12 @@ public class Client {
 
 	@Override
 	public String toString() {
-		return "Client [id=" + id + ", prenom=" + prenom + ", nom=" + nom + "]";
+		return "Client [id=" + id + ", prenom=" + prenom + ", nom=" + nom + ", commentaireUltraSecret="
+				+ commentaireUltraSecret + "]";
 	}
 
+	
+
+	
 
 }

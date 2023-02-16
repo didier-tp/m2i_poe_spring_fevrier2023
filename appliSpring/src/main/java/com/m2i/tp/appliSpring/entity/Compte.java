@@ -39,6 +39,7 @@ public class Compte /* implements IEntity */ {
 	}
 
 
+
 	@Override
 	public String toString() {
 		return "Compte [id=" + id + ", label=" + label + ", solde=" + solde + "]";

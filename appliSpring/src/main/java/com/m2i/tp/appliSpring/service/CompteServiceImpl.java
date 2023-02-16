@@ -39,8 +39,15 @@ public class CompteServiceImpl implements ICompteService {
 
 	@Override
 	public void virement(double montant, int numCptDeb, int numCptCred) {
-		// sera codé plus tard
-
+		Compte cptDeb = compteRepository.findById(numCptDeb).orElse(null);
+		cptDeb.setSolde(cptDeb.getSolde() - montant);
+		compteRepository.save(cptDeb);//.save() pourra être automatique si @Transactional 
+		                              //et donc cptDeb à l'état persistant .
+		Compte cptCred = compteRepository.findById(numCptCred).orElse(null);
+		cptCred.setSolde(cptCred.getSolde() + montant);
+		compteRepository.save(cptCred);//.save() pourra être automatique si @Transactional 
+		                              //et donc cptCred à l'état persistant .
+		//on peut faire mieux : try/catch , garder une trace du virement , regle de gestion ...
 	}
 
 }

@@ -31,5 +31,10 @@ public class TestServiceCompte {
 		System.out.println("cptA_relu = " + cptA_relu.toString());
 		Assertions.assertEquals("compte_A", cptA_relu.getLabel());
 	}
+	
+	@Test
+	public void testBonVirement() {
+		
+	}
 
 }
