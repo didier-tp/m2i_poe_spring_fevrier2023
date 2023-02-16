@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.m2i.tp.appliSpring.AppliSpringApplication;
+import com.m2i.tp.appliSpring.entity.Client;
 import com.m2i.tp.appliSpring.entity.Compte;
 
 @ExtendWith(SpringExtension.class) //classe interprété par junit5/jupiter + extension spring
@@ -24,6 +25,10 @@ public class TestCompteRepository {
 	
 	@Test
 	public void testDivers() {
+		Client c1 = new Client(null,"jean","Bon");
+		c1.setPrenom("luc");//.setPrenom() généré par lombok est ou pas compris par l'IDE
+		
+		
 		compteRepository.save( new Compte(null,"compte_A",50.0) ); 
 		compteRepository.save( new Compte(null,"my_account_B",150.0) ); 
 		compteRepository.save( new Compte(null,"compte_C",30.0) ); 
