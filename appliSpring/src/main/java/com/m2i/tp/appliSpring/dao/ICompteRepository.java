@@ -31,5 +31,16 @@ public interface ICompteRepository extends JpaRepository<Compte,Integer> {
         Iterable<Compte> findAll();
         void deleteById(Integer id);
 	 */
+	
+	//méthode de recherche qui est conforme à des convention de noms
+	//findBy + nomPropriete "solde" dans classe Compte + "GreaterThanEqual"
+	//ce code du SELECT sera généré automatiquement
+	List<Compte> findBySoldeGreaterThanEqual(double soldeMini);
 }
+
+/*
+ NB: le framework spring-data va générer automatiquement une classe
+ d'implémentation du DAO (de l'interface ICompteRepository 
+ qui hérite de JpaRepository .
+ */
 
