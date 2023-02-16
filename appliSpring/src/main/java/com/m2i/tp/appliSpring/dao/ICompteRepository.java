@@ -2,6 +2,8 @@ package com.m2i.tp.appliSpring.dao;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import com.m2i.tp.appliSpring.entity.Compte;
 
 /*
@@ -9,10 +11,25 @@ import com.m2i.tp.appliSpring.entity.Compte;
  *   appelé "Repository" dans Spring
  *   avec méthodes CRUD
  */
-public interface ICompteRepository /* extends JpaRepository<Compte,Integer> */{
+
+/*
+//V1 sans JpaRepository de Spring-data
+public interface ICompteRepository {
    Compte save(Compte cpt); //au sens saveOrUpdate (INSERT INTO ou UPDATE SQL)
    Compte findById(Integer id); //recherche par clef primaire
    List<Compte> findAll();
    void deleteById(Integer id);
    //...
 }
+*/
+
+public interface ICompteRepository extends JpaRepository<Compte,Integer> {
+	/*
+	 principales méthodes héritées:
+	    Compte save(Compte cpt); 
+        Optional<Compte> findById(Integer id); 
+        Iterable<Compte> findAll();
+        void deleteById(Integer id);
+	 */
+}
+
