@@ -1,10 +1,15 @@
 package com.m2i.tp.appliSpring.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import lombok.Getter;
@@ -19,6 +24,10 @@ import lombok.Setter;
 //@AllArgsConstructor avec le piege nombre d'argument sui peut evoluer
 
 @Entity
+@NamedQuery(name="Client.findByIdWithComptes", 
+           query="SELECT cli FROM Client cli LEFT JOIN FETCH cli.comptes WHERE cli.id = ?1")
+//NB: le mot clef FETCH de Hibernate demande à remonter tout de suite les comptes rattachés au client
+//même si on est par défaut en mode lazy
 public class Client {
 	
 	@Id
@@ -30,6 +39,10 @@ public class Client {
 	
 	@Column(length = 64)
 	private String nom;
+	
+	@OneToMany(mappedBy = "client",fetch = FetchType.LAZY)
+	  //mappedBy = "client" car au dessus de Compte.client il y a @ManyToOne
+	private List<Compte> comptes;
 	
 	@Transient //en mémoire seulement (jamais sctocké en base)
 	private String commentaireUltraSecret;

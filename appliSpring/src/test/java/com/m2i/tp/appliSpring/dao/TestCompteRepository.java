@@ -54,6 +54,14 @@ public class TestCompteRepository {
 	    List<Compte> comptesDuClient1 = compteRepository.findByClientId(c1.getId());
 	    System.out.println("comptesDuClient1="+comptesDuClient1);
 	    Assertions.assertTrue(comptesDuClient1.size()>=2);
+	    
+	    //Client c1_relu = clientRepository.findById(c1.getId()).orElse(null);
+	    Client c1_relu = clientRepository.findByIdWithComptes(c1.getId());
+	    //lazy..Exception si on parcours c1_relu.getComptes() après un appel à clientRepository.findById()
+	    System.out.println("c1_relu=" + c1_relu.toString());
+	    for(Compte c : c1_relu.getComptes()) {
+	    	System.out.println("\t" + c);
+	    }
 	}
 
 }
