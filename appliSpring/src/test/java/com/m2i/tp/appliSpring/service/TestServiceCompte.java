@@ -23,7 +23,7 @@ public class TestServiceCompte {
 	@Test
 	public void testAjoutCompte() {
 		CompteDto cptA = new CompteDto(null,"compte_A",50.0);
-		compteService.create(cptA); //créer en base de données (ou en mémoire si simulé)
+		cptA = compteService.create(cptA); //créer en base de données (ou en mémoire si simulé)
 		Integer numCptA = cptA.getId();
 		System.out.println("numero du compte A = " + numCptA);
 		
@@ -35,9 +35,9 @@ public class TestServiceCompte {
 	@Test
 	public void testBonVirement() {
 		CompteDto cptA = new CompteDto(null,"compte_A",50.0);
-		compteService.create(cptA); 
+		cptA = compteService.create(cptA); 
 		CompteDto cptB = new CompteDto(null,"compte_B",150.0);
-		compteService.create(cptB);
+		cptB= compteService.create(cptB);
 		System.out.println("avant bon virement : " + cptA.getSolde() + " " + cptB.getSolde());
 		compteService.virement(20.0, cptA.getId(), cptB.getId());
 		CompteDto cptA_relu_apres = compteService.findById(cptA.getId());
@@ -51,9 +51,9 @@ public class TestServiceCompte {
 	@Test
 	public void testMauvaisVirement() {
 		CompteDto cptA = new CompteDto(null,"compte_A",50.0);
-		compteService.create(cptA); 
+		cptA= compteService.create(cptA); 
 		CompteDto cptB = new CompteDto(null,"compte_B",150.0);
-		compteService.create(cptB);
+		cptB = compteService.create(cptB);
 		System.out.println("avant mauvais virement : " + cptA.getSolde() + " " + cptB.getSolde());
 		try {
 			compteService.virement(20.0, cptA.getId(), -5 /* n'existe pas */);

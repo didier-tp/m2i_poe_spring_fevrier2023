@@ -41,9 +41,9 @@ public class CompteServiceImpl implements ICompteService {
 	public CompteDto create(CompteDto cptDto) {
 		Compte compteEntity = MyGenericMapper.map(cptDto,Compte.class);
 		compteRepository.save(compteEntity);
-		//return MyGenericMapper.map(compteEntity,CompteDto.class);
-		cptDto.setId(compteEntity.getId());
-		return cptDto;
+		return MyGenericMapper.map(compteEntity,CompteDto.class);
+		//cptDto.setId(compteEntity.getId());
+		//return cptDto;
 	}
 
 	@Override
