@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.m2i.tp.appliSpring.converter.MyDtoConverter;
 import com.m2i.tp.appliSpring.converter.MyGenericMapper;
 import com.m2i.tp.appliSpring.dao.ICompteRepository;
 import com.m2i.tp.appliSpring.dto.CompteDto;
@@ -34,7 +35,10 @@ public class CompteServiceImpl implements ICompteService {
 		Compte compte = compteRepository.findById(id).orElse(null);
 		if(compte==null)
 			throw new NotFoundException("compte not found with id=" +id);
-		CompteDto compteDto = MyGenericMapper.map(compte, CompteDto.class);
+		
+		//CompteDto compteDto = MyGenericMapper.map(compte, CompteDto.class);
+		CompteDto compteDto = MyDtoConverter.compteToCompteDto(compte);
+		
 		//compteDto.setNumero(compte.getId()); //faisable ici ou ailleurs si nécessaire
 		return compteDto;
 	}
