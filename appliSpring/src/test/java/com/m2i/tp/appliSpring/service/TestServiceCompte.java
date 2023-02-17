@@ -47,5 +47,26 @@ public class TestServiceCompte {
 		Assertions.assertEquals(cptA.getSolde() - 20, cptA_relu_apres.getSolde(),0.0001);
 		Assertions.assertEquals(cptB.getSolde() + 20, cptB_relu_apres.getSolde(),0.0001);
 	}
+	
+	@Test
+	public void testMauvaisVirement() {
+		Compte cptA = new Compte(null,"compte_A",50.0);
+		compteService.create(cptA); 
+		Compte cptB = new Compte(null,"compte_B",150.0);
+		compteService.create(cptB);
+		System.out.println("avant mauvais virement : " + cptA.getSolde() + " " + cptB.getSolde());
+		try {
+			compteService.virement(20.0, cptA.getId(), -5 /* n'existe pas */);
+		} catch (Exception e) {
+			System.out.println("exception normale , attendue: " + e.getMessage());
+			//e.printStackTrace();
+		}
+		Compte cptA_relu_apres = compteService.findById(cptA.getId());
+		Compte cptB_relu_apres = compteService.findById(cptB.getId());
+		System.out.println("apres mauvais virement : " + cptA_relu_apres.getSolde() 
+		                    + " " + cptB_relu_apres.getSolde());
+		Assertions.assertEquals(cptA.getSolde() , cptA_relu_apres.getSolde(),0.0001);
+		Assertions.assertEquals(cptB.getSolde() , cptB_relu_apres.getSolde(),0.0001);
+	}
 
 }

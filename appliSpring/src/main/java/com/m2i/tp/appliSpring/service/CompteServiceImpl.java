@@ -39,7 +39,7 @@ public class CompteServiceImpl implements ICompteService {
 	}
 
 	@Override
-	//@Transactional
+	@Transactional
 	public void virement(double montant, int numCptDeb, int numCptCred) {
 		Compte cptDeb = compteRepository.findById(numCptDeb).orElse(null);
 		cptDeb.setSolde(cptDeb.getSolde() - montant);
