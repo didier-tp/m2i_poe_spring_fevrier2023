@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.m2i.tp.appliSpring.dao.ICompteRepository;
 import com.m2i.tp.appliSpring.entity.Compte;
@@ -38,6 +39,7 @@ public class CompteServiceImpl implements ICompteService {
 	}
 
 	@Override
+	//@Transactional
 	public void virement(double montant, int numCptDeb, int numCptCred) {
 		Compte cptDeb = compteRepository.findById(numCptDeb).orElse(null);
 		cptDeb.setSolde(cptDeb.getSolde() - montant);

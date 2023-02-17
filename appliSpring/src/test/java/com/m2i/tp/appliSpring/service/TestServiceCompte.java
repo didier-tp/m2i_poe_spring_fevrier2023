@@ -34,7 +34,18 @@ public class TestServiceCompte {
 	
 	@Test
 	public void testBonVirement() {
-		
+		Compte cptA = new Compte(null,"compte_A",50.0);
+		compteService.create(cptA); 
+		Compte cptB = new Compte(null,"compte_B",150.0);
+		compteService.create(cptB);
+		System.out.println("avant bon virement : " + cptA.getSolde() + " " + cptB.getSolde());
+		compteService.virement(20.0, cptA.getId(), cptB.getId());
+		Compte cptA_relu_apres = compteService.findById(cptA.getId());
+		Compte cptB_relu_apres = compteService.findById(cptB.getId());
+		System.out.println("apres bon virement : " + cptA_relu_apres.getSolde() 
+		                    + " " + cptB_relu_apres.getSolde());
+		Assertions.assertEquals(cptA.getSolde() - 20, cptA_relu_apres.getSolde(),0.0001);
+		Assertions.assertEquals(cptB.getSolde() + 20, cptB_relu_apres.getSolde(),0.0001);
 	}
 
 }
