@@ -36,8 +36,8 @@ public class CompteServiceImpl implements ICompteService {
 		if(compte==null)
 			throw new NotFoundException("compte not found with id=" +id);
 		
-		//CompteDto compteDto = MyGenericMapper.map(compte, CompteDto.class);
-		CompteDto compteDto = MyDtoConverter.compteToCompteDto(compte);
+		//CompteDto compteDto = MyGenericMapper.map(compte, CompteDto.class);//solution generic/reutilisable mais pas performant 
+		CompteDto compteDto = MyDtoConverter.compteToCompteDto(compte);//plus long à coder mais plus performant (il existe MapStruct qui peut aider)
 		
 		//compteDto.setNumero(compte.getId()); //faisable ici ou ailleurs si nécessaire
 		return compteDto;
