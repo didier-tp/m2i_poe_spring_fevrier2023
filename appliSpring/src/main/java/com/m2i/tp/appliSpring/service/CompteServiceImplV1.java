@@ -7,43 +7,56 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.m2i.tp.appliSpring.converter.MyGenericMapper;
+import com.m2i.tp.appliSpring.dao.IClientRepository;
 import com.m2i.tp.appliSpring.dao.ICompteRepository;
-import com.m2i.tp.appliSpring.dto.CompteDto;
+import com.m2i.tp.appliSpring.entity.Client;
 import com.m2i.tp.appliSpring.entity.Compte;
-
+//V1 sans héritage de classe abstraite ni DTO
 
 //@Component
 @Service //@Service signifie @Component de type service métier 
 @Transactional(/* propagation = Propagation.REQUIRED par defaut */)
-public class CompteServiceImpl implements ICompteService {
+public class CompteServiceImplV1 implements ICompteServiceV1 {
 	
+	//@Resource(name="compteRepositorySimuImpl") //injection de dépendance
+	//@Resource(name="compteRepositoryJpaImpl")
+	//private ICompteRepositoryV1 compteRepository;//=null par defaut
 	
 	@Resource
 	private ICompteRepository compteRepository;//=null par defaut
 	
+	@Resource
+	private IClientRepository clientRepository;
 	
-
 	@Override
-	public List<CompteDto> findAll() {
-		return MyGenericMapper.map(compteRepository.findAll(),CompteDto.class);
+	public Client clientAvecSesComptes(Integer idClient) {
+		Client cli = clientRepository.findById(idClient).orElse(null);
+		/*
+		for(Compte cpt: cli.getComptes()) {
+			//boucle for à vide pour remonter les comptes en mémoire (petits select ..)
+			//tout de suite (en cli.getComptes()mode lazy) avant que ce soit trop tard
+			//avant fin de @Transactional et du entityManager;
+		}*/
+		cli.getComptes().size();//l'appel à .size() déclenche en interne boucle for
+		//TOUT CA , ça fonctionne , mais c'est un peu de la bidouille
+		//il vaut mieux appeler clientRepository.findByIdWithComptes()
+		return cli;
 	}
 
 	@Override
-	public CompteDto findById(Integer id) {
-		Compte compte = compteRepository.findById(id).orElse(null);
-		CompteDto compteDto = MyGenericMapper.map(compte, CompteDto.class);
-		//compteDto.setNumero(compte.getId()); //faisable ici ou ailleurs si nécessaire
-		return compteDto;
+	public List<Compte> findAll() {
+		return compteRepository.findAll();
 	}
 
 	@Override
-	public CompteDto create(CompteDto cptDto) {
-		Compte compteEntity = MyGenericMapper.map(cptDto,Compte.class);
-		compteRepository.save(compteEntity);
-		//return MyGenericMapper.map(compteEntity,CompteDto.class);
-		cptDto.setId(compteEntity.getId());
-		return cptDto;
+	public Compte findById(Integer id) {
+		//return compteRepository.findById(id);//sans Optional<>
+		return compteRepository.findById(id).orElse(null);
+	}
+
+	@Override
+	public Compte create(Compte cpt) {
+		return compteRepository.save(cpt);
 	}
 
 	@Override

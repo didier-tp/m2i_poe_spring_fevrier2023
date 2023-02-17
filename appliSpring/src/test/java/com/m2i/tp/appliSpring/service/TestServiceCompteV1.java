@@ -9,39 +9,39 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.m2i.tp.appliSpring.AppliSpringApplication;
-import com.m2i.tp.appliSpring.dto.CompteDto;
+import com.m2i.tp.appliSpring.entity.Compte;
 
 @ExtendWith(SpringExtension.class) //classe interprété par junit5/jupiter + extension spring
 @SpringBootTest(classes= {AppliSpringApplication.class})//le test démarre en reprenant
               //la configuration de la classe principale de l'application
-public class TestServiceCompte {
+public class TestServiceCompteV1 {
 	
 	@Resource //injection de dépendance
-	private ICompteService compteService;  //à tester
+	private ICompteServiceV1 compteService;  //à tester
 	
 	
 	@Test
 	public void testAjoutCompte() {
-		CompteDto cptA = new CompteDto(null,"compte_A",50.0);
+		Compte cptA = new Compte(null,"compte_A",50.0);
 		compteService.create(cptA); //créer en base de données (ou en mémoire si simulé)
 		Integer numCptA = cptA.getId();
 		System.out.println("numero du compte A = " + numCptA);
 		
-		CompteDto cptA_relu = compteService.findById(numCptA);
+		Compte cptA_relu = compteService.findById(numCptA);
 		System.out.println("cptA_relu = " + cptA_relu.toString());
 		Assertions.assertEquals("compte_A", cptA_relu.getLabel());
 	}
 	
 	@Test
 	public void testBonVirement() {
-		CompteDto cptA = new CompteDto(null,"compte_A",50.0);
+		Compte cptA = new Compte(null,"compte_A",50.0);
 		compteService.create(cptA); 
-		CompteDto cptB = new CompteDto(null,"compte_B",150.0);
+		Compte cptB = new Compte(null,"compte_B",150.0);
 		compteService.create(cptB);
 		System.out.println("avant bon virement : " + cptA.getSolde() + " " + cptB.getSolde());
 		compteService.virement(20.0, cptA.getId(), cptB.getId());
-		CompteDto cptA_relu_apres = compteService.findById(cptA.getId());
-		CompteDto cptB_relu_apres = compteService.findById(cptB.getId());
+		Compte cptA_relu_apres = compteService.findById(cptA.getId());
+		Compte cptB_relu_apres = compteService.findById(cptB.getId());
 		System.out.println("apres bon virement : " + cptA_relu_apres.getSolde() 
 		                    + " " + cptB_relu_apres.getSolde());
 		Assertions.assertEquals(cptA.getSolde() - 20, cptA_relu_apres.getSolde(),0.0001);
@@ -50,9 +50,9 @@ public class TestServiceCompte {
 	
 	@Test
 	public void testMauvaisVirement() {
-		CompteDto cptA = new CompteDto(null,"compte_A",50.0);
+		Compte cptA = new Compte(null,"compte_A",50.0);
 		compteService.create(cptA); 
-		CompteDto cptB = new CompteDto(null,"compte_B",150.0);
+		Compte cptB = new Compte(null,"compte_B",150.0);
 		compteService.create(cptB);
 		System.out.println("avant mauvais virement : " + cptA.getSolde() + " " + cptB.getSolde());
 		try {
@@ -61,8 +61,8 @@ public class TestServiceCompte {
 			System.out.println("exception normale , attendue: " + e.getMessage());
 			//e.printStackTrace();
 		}
-		CompteDto cptA_relu_apres = compteService.findById(cptA.getId());
-		CompteDto cptB_relu_apres = compteService.findById(cptB.getId());
+		Compte cptA_relu_apres = compteService.findById(cptA.getId());
+		Compte cptB_relu_apres = compteService.findById(cptB.getId());
 		System.out.println("apres mauvais virement : " + cptA_relu_apres.getSolde() 
 		                    + " " + cptB_relu_apres.getSolde());
 		Assertions.assertEquals(cptA.getSolde() , cptA_relu_apres.getSolde(),0.0001);

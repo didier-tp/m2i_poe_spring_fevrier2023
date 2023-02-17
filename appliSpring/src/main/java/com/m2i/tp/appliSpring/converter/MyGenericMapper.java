@@ -14,6 +14,8 @@ public class MyGenericMapper {
 			//without mapStruct
 			destination = destinationClass.getDeclaredConstructor().newInstance();
 			BeanUtils.copyProperties(source, destination);
+			//.copyProperties recopie d'un objet vers un autre toutes
+			//les propriétés de mêmes noms.
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
