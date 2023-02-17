@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +22,8 @@ import com.m2i.tp.appliSpring.service.generic.AbstractGenericServiceImpl;
 public class CompteServiceImplV2
               extends AbstractGenericServiceImpl<Compte,CompteDto,ICompteRepository> 
               implements ICompteServiceV2{
+	
+	private Logger logger = LoggerFactory.getLogger(CompteServiceImplV2.class);//slf4j
 	
 	
 	public CompteServiceImplV2() {
@@ -57,6 +61,7 @@ public class CompteServiceImplV2
 			//on peut faire mieux : try/catch , garder une trace du virement , regle de gestion ...
 		} catch (Exception e) {
 			//e.printStackTrace();
+			logger.error("echec virement",e);
 			throw new RuntimeException("echec virement",e);
 		}
 	}
