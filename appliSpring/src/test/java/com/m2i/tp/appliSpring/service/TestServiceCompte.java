@@ -10,6 +10,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.m2i.tp.appliSpring.AppliSpringApplication;
 import com.m2i.tp.appliSpring.dto.CompteDto;
+import com.m2i.tp.appliSpring.exception.NotFoundException;
 
 @ExtendWith(SpringExtension.class) //classe interprété par junit5/jupiter + extension spring
 @SpringBootTest(classes= {AppliSpringApplication.class})//le test démarre en reprenant
@@ -21,15 +22,44 @@ public class TestServiceCompte {
 	
 	
 	@Test
-	public void testAjoutCompte() {
+	public void testCRUDCompte() {
+		
+		//AJOUT
 		CompteDto cptA = new CompteDto(null,"compte_A",50.0);
 		cptA = compteService.create(cptA); //créer en base de données (ou en mémoire si simulé)
 		Integer numCptA = cptA.getId();
 		System.out.println("numero du compte A = " + numCptA);
 		
+		//VERIE AJOUT
 		CompteDto cptA_relu = compteService.findById(numCptA);
 		System.out.println("cptA_relu = " + cptA_relu.toString());
 		Assertions.assertEquals("compte_A", cptA_relu.getLabel());
+		
+		//UPDATE
+		cptA_relu.setLabel("compte_A_Modifie");
+		cptA_relu.setSolde(60.0);
+		
+		cptA_relu = compteService.update(cptA_relu);
+		//VERIFIE UPDATE
+		CompteDto cptA_relu2 = compteService.findById(numCptA);
+		System.out.println("cptA_relu2 = " + cptA_relu2.toString());
+		Assertions.assertEquals("compte_A_Modifie", cptA_relu2.getLabel());
+		
+		try {
+			compteService.update(new CompteDto(-6,"compte inexistant",89.9));
+			Assertions.fail("probleme : execption attendue pas remotee");
+		} catch (Exception e) {
+			System.out.println("e="+e.getMessage());
+			Assertions.assertTrue(e.getClass().getSimpleName().equals("NotFoundException"));
+		}
+		
+		//DELETE:
+		compteService.deleteById(numCptA);
+		
+		//VERIFIER SUPPRESSION:
+		Assertions.assertTrue(compteService.ifEntityExistById(numCptA)==false);
+		
+		
 	}
 	
 	@Test
