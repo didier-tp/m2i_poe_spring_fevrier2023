@@ -6,8 +6,10 @@ import javax.annotation.Resource;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import com.m2i.tp.appliSpring.dao.IClientRepository;
+import com.m2i.tp.appliSpring.dto.ClientDto;
 import com.m2i.tp.appliSpring.dto.CompteDto;
+import com.m2i.tp.appliSpring.dto.CompteDtoFull;
+import com.m2i.tp.appliSpring.service.IClientService;
 import com.m2i.tp.appliSpring.service.ICompteServiceV2;
 
 @Component
@@ -18,16 +20,35 @@ public class ReInitDefaultDataSet {
 	@Resource
 	private ICompteServiceV2 compteService;
 	
-	@Resource //injection de dépendance
+	@Resource
+	private IClientService clientService;
+	
+	//@Resource //injection de dépendance
 	//private IClientRepository clientRepository;  //pour aider à remplir les tables
 	//private IClientRepository compteRepository;  //pour aider à remplir les tables
 	
 	@PostConstruct
 	public void initDataSet() {
-		CompteDto cptA = new CompteDto(null,"compte_A",50.0);
-		cptA = compteService.create(cptA); 
-		CompteDto cptB = new CompteDto(null,"compte_B",150.0);
-		cptB= compteService.create(cptB);
+		
+		ClientDto cliX = new ClientDto(null,"alex","Therieur");
+		cliX = clientService.create(cliX); 
+		
+		ClientDto cliY = new ClientDto(null,"axelle","Aire");
+		cliY = clientService.create(cliY); 
+		
+		
+		
+		CompteDtoFull cptA = new CompteDtoFull(null,"compte_A",50.0,cliX.getId());
+		cptA = compteService.createFull(cptA); 
+		
+		CompteDtoFull cptB = new CompteDtoFull(null,"compte_B",150.0,cliX.getId());
+		cptB= compteService.createFull(cptB);
+		
+		CompteDtoFull cptC = new CompteDtoFull(null,"compte_C",60.0,cliY.getId());
+		cptC = compteService.createFull(cptC); 
+		
+		CompteDtoFull cptD = new CompteDtoFull(null,"compte_D",160.0,cliY.getId());
+		cptD= compteService.createFull(cptD);
 	}
 
 }

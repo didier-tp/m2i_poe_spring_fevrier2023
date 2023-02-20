@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.m2i.tp.appliSpring.dao.ICompteRepository;
 import com.m2i.tp.appliSpring.dto.CompteDto;
+import com.m2i.tp.appliSpring.dto.CompteDtoFull;
 import com.m2i.tp.appliSpring.entity.Compte;
 import com.m2i.tp.appliSpring.service.generic.IGenericService;
 
@@ -12,4 +13,6 @@ public interface ICompteServiceV2 extends IGenericService<Compte,CompteDto,IComp
     List<CompteDto> findBySoldeMini(double soldeMini);
     List<CompteDto> findByClientId(Integer idClient);//....
     void virement(double montant, int numCptDeb, int numCptCred);//...
+    
+    public CompteDtoFull createFull(CompteDtoFull dto);
 }

@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.m2i.tp.appliSpring.converter.MyGenericMapper;
+import com.m2i.tp.appliSpring.dao.IClientRepository;
 import com.m2i.tp.appliSpring.dao.ICompteRepository;
 import com.m2i.tp.appliSpring.dto.CompteDto;
+import com.m2i.tp.appliSpring.dto.CompteDtoFull;
 import com.m2i.tp.appliSpring.entity.Compte;
 import com.m2i.tp.appliSpring.service.generic.AbstractGenericServiceImpl;
 
@@ -32,6 +34,9 @@ public class CompteServiceImplV2
 	
 	@Resource
 	private ICompteRepository compteRepository;//=null par defaut
+	
+	@Resource
+	private IClientRepository clientRepository;//=null par defaut
 	
 
 	@Override
@@ -76,6 +81,14 @@ public class CompteServiceImplV2
 	public List<CompteDto> findByClientId(Integer idClient) {
 		return MyGenericMapper.map(compteRepository.findByClientId(idClient),
                                    CompteDto.class);
+	}
+	
+	public CompteDtoFull createFull(CompteDtoFull compteDtoFull) {
+		Compte entity = MyGenericMapper.map(compteDtoFull,Compte.class);
+		entity.setClient(clientRepository.findById(compteDtoFull.getIdClient()).orElse(null));
+		compteRepository.save(entity); //auto_incr
+		compteDtoFull.setId(entity.getId());
+		return compteDtoFull;
 	}
 
 

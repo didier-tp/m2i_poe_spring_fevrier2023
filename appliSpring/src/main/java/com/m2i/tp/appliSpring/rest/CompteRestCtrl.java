@@ -1,5 +1,6 @@
 package com.m2i.tp.appliSpring.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -61,11 +62,16 @@ public class CompteRestCtrl {
 	//ou bien      http://localhost:8080/appliSpring/api-bank/compte?soldeMini=99&idClient=1 possible
 	@GetMapping("")
 	public List<CompteDto> getCompteByCriteria(
-			@RequestParam(name="soldeMini",required=false)  Double soldeMini) {
-		if(soldeMini==null)
+			@RequestParam(name="soldeMini",required=false)  Double soldeMini,
+			@RequestParam(name="idClient",required=false)  Integer idClient) {
+		if(soldeMini==null && idClient==null)
 		    return compteService.findAll();
-		else
+		else if(soldeMini!=null)
 			return compteService.findBySoldeMini(soldeMini);
+		else if(idClient!=null)
+			return compteService.findByClientId(idClient);
+		else 
+			return new ArrayList<CompteDto>();
 	}
 
 	// URL: http://localhost:8080/appliSpring/api-bank/compte
