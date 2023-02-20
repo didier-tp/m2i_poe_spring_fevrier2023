@@ -1,5 +1,7 @@
 package com.m2i.tp.appliSpring.exception;
 
+//@ResponseStatus(HttpStatus.NOT_FOUND) //404
+//pas d'annotation @ResponseStatus mais @ControllerAdvice
 public class NotFoundException extends RuntimeException {
 
 	public NotFoundException() {

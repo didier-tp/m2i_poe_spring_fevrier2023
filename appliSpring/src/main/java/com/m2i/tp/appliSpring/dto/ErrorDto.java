@@ -9,7 +9,6 @@ import lombok.ToString;
 @Getter @Setter @ToString @NoArgsConstructor
 @AllArgsConstructor
 public class ErrorDto {
-
-	private String message;
-	private String detail;
+	protected String message;
+	protected String detail;
 }
