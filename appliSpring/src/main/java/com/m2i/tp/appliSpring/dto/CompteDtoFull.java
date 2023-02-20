@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter @Setter @ToString @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor
 public class CompteDtoFull extends CompteDto{
 	private Integer idClient ;
 
@@ -18,6 +18,12 @@ public class CompteDtoFull extends CompteDto{
 		super(id, label, solde);
 		this.idClient = numCli;
 	}
+
+	@Override
+	public String toString() {
+		return "CompteDtoFull [idClient=" + idClient + ", toString()=" + super.toString() + "]";
+	}
+	
 	
 	
 }

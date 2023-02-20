@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.m2i.tp.appliSpring.dto.CompteDto;
+import com.m2i.tp.appliSpring.dto.CompteDtoFull;
 import com.m2i.tp.appliSpring.dto.ErrorDto;
 import com.m2i.tp.appliSpring.dto.InfoDto;
 import com.m2i.tp.appliSpring.exception.NotFoundException;
@@ -74,13 +75,26 @@ public class CompteRestCtrl {
 			return new ArrayList<CompteDto>();
 	}
 
+	/*
 	// URL: http://localhost:8080/appliSpring/api-bank/compte
 	//appelé en mode POST avec dans le corps de la requete:
 	//    { "id" : null , "label" : "compteXy" , "solde" : 66.66 }
 	// ou {  "label" : "compteXy" , "solde" : 66.66 }
 	@PostMapping("")
 	public CompteDto postCompte(@RequestBody @Valid CompteDto compteDto) {
+		System.out.println("compteDto="+compteDto);
 		return compteService.create(compteDto);//id auto incrémenté 
+	}
+	*/
+	
+	// URL: http://localhost:8080/appliSpring/api-bank/compte
+	//appelé en mode POST avec dans le corps de la requete:
+	//    { "id" : null , "label" : "compteXy" , "solde" : 66.66 , "idClient" : 1 }
+	// ou {  "label" : "compteXy" , "solde" : 66.66  , "idClient" : 1 }
+	@PostMapping("")
+	public CompteDtoFull postCompte(@RequestBody @Valid CompteDtoFull compteDto) {
+		System.out.println("compteDto="+compteDto);
+		return compteService.createFull(compteDto);//id auto incrémenté 
 	}
 	
 	// URL: http://localhost:8080/appliSpring/api-bank/compte
