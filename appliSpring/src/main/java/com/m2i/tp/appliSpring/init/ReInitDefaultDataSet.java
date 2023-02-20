@@ -10,6 +10,7 @@ import com.m2i.tp.appliSpring.service.ICompteServiceV2;
 
 @Component
 //@Profile("reInit")
+//@Lazy
 public class ReInitDefaultDataSet {
 
 	@Resource
