@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
+import com.m2i.tp.appliSpring.dao.IClientRepository;
 import com.m2i.tp.appliSpring.dto.CompteDto;
 import com.m2i.tp.appliSpring.service.ICompteServiceV2;
 
@@ -16,6 +17,10 @@ public class ReInitDefaultDataSet {
 
 	@Resource
 	private ICompteServiceV2 compteService;
+	
+	@Resource //injection de dépendance
+	//private IClientRepository clientRepository;  //pour aider à remplir les tables
+	//private IClientRepository compteRepository;  //pour aider à remplir les tables
 	
 	@PostConstruct
 	public void initDataSet() {
