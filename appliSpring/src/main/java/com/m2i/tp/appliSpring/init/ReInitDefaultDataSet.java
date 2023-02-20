@@ -3,14 +3,15 @@ package com.m2i.tp.appliSpring.init;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import com.m2i.tp.appliSpring.dto.CompteDto;
 import com.m2i.tp.appliSpring.service.ICompteServiceV2;
 
 @Component
-//@Profile("reInit")
-//@Lazy
+@Profile("reInit") //cette classe sera prise en compte que si 
+                   //le profil "reInit" est activé au démarrage de l'application
 public class ReInitDefaultDataSet {
 
 	@Resource

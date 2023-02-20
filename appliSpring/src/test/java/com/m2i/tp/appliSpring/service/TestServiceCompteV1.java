@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.m2i.tp.appliSpring.AppliSpringApplication;
@@ -14,6 +15,8 @@ import com.m2i.tp.appliSpring.entity.Compte;
 @ExtendWith(SpringExtension.class) //classe interprété par junit5/jupiter + extension spring
 @SpringBootTest(classes= {AppliSpringApplication.class})//le test démarre en reprenant
               //la configuration de la classe principale de l'application
+@ActiveProfiles({"dev" ,"mysql"})
+//@ActiveProfiles({"dev" ,"h2"})
 public class TestServiceCompteV1 {
 	
 	@Resource //injection de dépendance
