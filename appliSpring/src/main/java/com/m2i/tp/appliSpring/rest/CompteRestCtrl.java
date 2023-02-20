@@ -3,6 +3,7 @@ package com.m2i.tp.appliSpring.rest;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -68,12 +69,12 @@ public class CompteRestCtrl {
 	//    { "id" : null , "label" : "compteXy" , "solde" : 66.66 }
 	// ou {  "label" : "compteXy" , "solde" : 66.66 }
 	@PostMapping("")
-	public CompteDto postCompte(@RequestBody CompteDto compteDto) {
+	public CompteDto postCompte(@RequestBody @Valid CompteDto compteDto) {
 		return compteService.create(compteDto);//id auto incrémenté 
 	}
 	
 	// URL: http://localhost:8080/appliSpring/api-bank/compte
-	//appelé en mode POST avec dans le corps de la requete:
+	//appelé en mode PUT avec dans le corps de la requete:
 	//    { "id" : 3 , "label" : "compte_XY" , "solde" : 77.77 }
 	@PutMapping("")
 	public CompteDto putCompte(@RequestBody CompteDto compteDto) {
