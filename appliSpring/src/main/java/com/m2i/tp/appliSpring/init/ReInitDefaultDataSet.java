@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import com.m2i.tp.appliSpring.dto.ClientDto;
+import com.m2i.tp.appliSpring.dto.ClientDtoFull;
 import com.m2i.tp.appliSpring.dto.CompteDto;
 import com.m2i.tp.appliSpring.dto.CompteDtoFull;
 import com.m2i.tp.appliSpring.service.IClientService;
@@ -27,8 +28,9 @@ public class ReInitDefaultDataSet {
 	//private IClientRepository clientRepository;  //pour aider à remplir les tables
 	//private IClientRepository compteRepository;  //pour aider à remplir les tables
 	
+	/*
 	@PostConstruct
-	public void initDataSet() {
+	public void initDataSetV1() {
 		
 		ClientDto cliX = new ClientDto(null,"alex","Therieur");
 		cliX = clientService.create(cliX); 
@@ -49,6 +51,21 @@ public class ReInitDefaultDataSet {
 		
 		CompteDtoFull cptD = new CompteDtoFull(null,"compte_D",160.0,cliY.getId());
 		cptD= compteService.createFull(cptD);
+	}*/
+	
+	@PostConstruct
+	public void initDataSetV2() {
+		
+		ClientDtoFull cliX = new ClientDtoFull(null,"alex","Therieur");
+		cliX.getComptes().add(new CompteDto(null,"compte_A",50.0));
+		cliX.getComptes().add(new CompteDto(null,"compte_B",150.0));
+		cliX = clientService.createFull(cliX); 
+		
+		ClientDtoFull cliY = new ClientDtoFull(null,"axelle","Aire");
+		cliY.getComptes().add(new CompteDto(null,"compte_C",60.0));
+		cliY.getComptes().add(new CompteDto(null,"compte_D",160.0));
+		cliY = clientService.createFull(cliY); 
+		
 	}
 
 }
