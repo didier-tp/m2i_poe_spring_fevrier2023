@@ -2,10 +2,11 @@ package com.m2i.tp.appliSpring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @SpringBootApplication //@Configuration + @EnableAutoConfiguration + @ComponentScan(package courant)
 //@ComponentScan(basePackages = {"com.m2i.tp.appliSpring" , "com.m2i.tp.acote"})
+@EnableAspectJAutoProxy
 public class AppliSpringApplication {
 
 	public static void main(String[] args) {
