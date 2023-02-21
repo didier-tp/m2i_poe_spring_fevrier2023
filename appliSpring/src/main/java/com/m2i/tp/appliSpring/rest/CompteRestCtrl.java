@@ -29,8 +29,10 @@ import com.m2i.tp.appliSpring.exception.NotFoundException;
 import com.m2i.tp.appliSpring.service.ICompteServiceV2;
 
 @RestController 
+
 @CrossOrigin(origins = "*" , methods = { RequestMethod.GET , RequestMethod.POST , 
 		                                 RequestMethod.PUT , RequestMethod.DELETE })
+
 @RequestMapping(value="/api-bank/compte" , headers="Accept=application/json")
 public class CompteRestCtrl {
 	
