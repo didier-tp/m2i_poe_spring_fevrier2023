@@ -24,6 +24,7 @@ import com.m2i.tp.appliSpring.dto.CompteDto;
 import com.m2i.tp.appliSpring.dto.CompteDtoFull;
 import com.m2i.tp.appliSpring.dto.ErrorDto;
 import com.m2i.tp.appliSpring.dto.InfoDto;
+import com.m2i.tp.appliSpring.dto.VirementDto;
 import com.m2i.tp.appliSpring.exception.NotFoundException;
 import com.m2i.tp.appliSpring.service.ICompteServiceV2;
 
@@ -95,6 +96,23 @@ public class CompteRestCtrl {
 	public CompteDtoFull postCompte(@RequestBody @Valid CompteDtoFull compteDto) {
 		System.out.println("compteDto="+compteDto);
 		return compteService.createFull(compteDto);//id auto incrémenté 
+	}
+	// URL: http://localhost:8080/appliSpring/api-bank/compte/virement
+	//appelé en mode POST avec dans le corps de la requete:
+	//    { "montant" : 20.0 , "numCptDeb" : 1 , "numCptCred" : 2  }
+	@PostMapping("/virement")
+	public VirementDto postVirement(@RequestBody VirementDto virementDto) {
+		try {
+			compteService.virement(virementDto.getMontant(), 
+					               virementDto.getNumCptDeb(),
+					               virementDto.getNumCptCred());
+			virementDto.setOk(true);
+			virementDto.setMessage("virement bien effectué");
+		} catch (Exception e) {
+			virementDto.setOk(false);
+			virementDto.setMessage("echec virement " + e.getMessage());
+		}
+		return virementDto;
 	}
 	
 	// URL: http://localhost:8080/appliSpring/api-bank/compte
