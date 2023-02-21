@@ -1,0 +1,20 @@
+numClient : <input [(ngModel)]="numClient" /> <br/>
+<button (click)="searchComptes()">rechercher comptes du client</button> <br/>
+<table border="1">
+    <thead>
+     <tr><td>numero</td><td>label</td><td>solde</td></tr>
+    </thead>
+    <tbody id="tbody">
+     <tr *ngFor="let compte of listComptes">
+        <td>{{compte.numero}}</td><td>{{compte.label}}</td><td>{{compte.solde}}</td>
+    </tr>
+    </tbody>
+  </table> 
+  <hr/>
+  <h3>Virement</h3>
+  montant : <input [(ngModel)]="virement.montant" /> <br/>
+  numCptDeb : <input [(ngModel)]="virement.numCptDeb" /> <br/>
+  numCptCred : <input [(ngModel)]="virement.numCptCred" /> <br/>
+  <button (click)="declencherVirement()">declencherVirement</button> <br/>
+  ok? : {{virement.ok}} <br/>
+  message: {{virement.message}}
