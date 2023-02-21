@@ -15,3 +15,4 @@ cd c:\references\m2i_poe_spring_fevrier2023
 git pull
 ---------
 
+https://github.com/didier-tp/spring_nov2022 exemple avec sécurité 

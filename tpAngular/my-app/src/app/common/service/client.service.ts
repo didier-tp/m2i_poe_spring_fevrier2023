@@ -8,7 +8,8 @@ import { Client } from '../data/client';
 })
 export class ClientService {
 
-  baseUrl = "http://localhost:8080/appliSpringBoot/bank-api/client";
+  //baseUrl = "http://localhost:8080/appliSpringBoot/bank-api/client";
+  baseUrl = "http://localhost:8080/appliSpring/api-bank/client";
 
   constructor(private http :HttpClient) { }
 

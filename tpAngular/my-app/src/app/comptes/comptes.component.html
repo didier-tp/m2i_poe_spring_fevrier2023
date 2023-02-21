@@ -6,7 +6,8 @@ numClient : <input [(ngModel)]="numClient" /> <br/>
     </thead>
     <tbody id="tbody">
      <tr *ngFor="let compte of listComptes">
-        <td>{{compte.numero}}</td><td>{{compte.label}}</td><td>{{compte.solde}}</td>
+      <!-- <td>{{compte.numero}}</td> -->
+        <td>{{compte.id}}</td><td>{{compte.label}}</td><td>{{compte.solde}}</td>
     </tr>
     </tbody>
   </table> 

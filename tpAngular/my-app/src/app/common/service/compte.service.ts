@@ -9,12 +9,14 @@ import { Virement } from '../data/virement';
 })
 export class CompteService {
 
-  baseUrl = "http://localhost:8080/appliSpringBoot/bank-api/compte";
+  //baseUrl = "http://localhost:8080/appliSpringBoot/bank-api/compte"; //Nov2022
+  baseUrl = "http://localhost:8080/appliSpring/api-bank/compte";//fev2023
 
   constructor(private http :HttpClient) { }
 
   public rechercherComptesDuClient$(numClient:number) : Observable<Compte[]>{
-    let url = this.baseUrl + "?numClient="+numClient; 
+    //let url = this.baseUrl + "?numClient="+numClient; //Nov2022
+    let url = this.baseUrl + "?idClient="+numClient; //fev2023
     return this.http.get<Compte[]>(url);
   }
 
