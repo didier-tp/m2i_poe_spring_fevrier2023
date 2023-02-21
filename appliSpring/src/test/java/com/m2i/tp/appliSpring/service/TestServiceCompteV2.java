@@ -7,16 +7,18 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.m2i.tp.appliSpring.AppliSpringApplication;
+import com.m2i.tp.appliSpring.config.ServiceAndDaoConfig;
 import com.m2i.tp.appliSpring.dto.CompteDto;
 
 @ExtendWith(SpringExtension.class) //classe interprété par junit5/jupiter + extension spring
-@SpringBootTest(classes= {AppliSpringApplication.class})//le test démarre en reprenant
+//@SpringBootTest(classes= {AppliSpringApplication.class})//le test démarre en reprenant
               //la configuration de la classe principale de l'application
+@ContextConfiguration(classes = {ServiceAndDaoConfig.class})
+//@SpringBootTest(classes = {ServiceAndDaoConfig.class})
 @ActiveProfiles({"dev" ,"mysql"})
 //@ActiveProfiles({"dev" ,"h2"})
 public class TestServiceCompteV2 {

@@ -2,8 +2,10 @@ package com.m2i.tp.appliSpring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication //@Configuration + @EnableAutoConfiguration + @ComponentScan(packege courant)
+@SpringBootApplication //@Configuration + @EnableAutoConfiguration + @ComponentScan(package courant)
+//@ComponentScan(basePackages = {"com.m2i.tp.appliSpring" , "com.m2i.tp.acote"})
 public class AppliSpringApplication {
 
 	public static void main(String[] args) {
