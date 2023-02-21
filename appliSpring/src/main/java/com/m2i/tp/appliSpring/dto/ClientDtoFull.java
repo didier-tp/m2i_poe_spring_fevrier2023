@@ -10,7 +10,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Getter @Setter  @NoArgsConstructor
-@AllArgsConstructor
 public class ClientDtoFull extends ClientDto {
 	private List<CompteDto> comptes;
 
@@ -28,6 +27,6 @@ public class ClientDtoFull extends ClientDto {
 	public String toString() {
 		return "ClientDtoFull [comptes=" + comptes + ", toString()=" + super.toString() + "]";
 	}
-	
+
 	
 }

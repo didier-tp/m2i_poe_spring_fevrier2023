@@ -28,7 +28,7 @@ public class ReInitDefaultDataSet {
 	//private IClientRepository clientRepository;  //pour aider à remplir les tables
 	//private IClientRepository compteRepository;  //pour aider à remplir les tables
 	
-	/*
+	
 	@PostConstruct
 	public void initDataSetV1() {
 		
@@ -51,8 +51,9 @@ public class ReInitDefaultDataSet {
 		
 		CompteDtoFull cptD = new CompteDtoFull(null,"compte_D",160.0,cliY.getId());
 		cptD= compteService.createFull(cptD);
-	}*/
+	}
 	
+	/*
 	@PostConstruct
 	public void initDataSetV2() {
 		
@@ -60,12 +61,13 @@ public class ReInitDefaultDataSet {
 		cliX.getComptes().add(new CompteDto(null,"compte_A",50.0));
 		cliX.getComptes().add(new CompteDto(null,"compte_B",150.0));
 		cliX = clientService.createFull(cliX); 
+		System.out.println("cliX="+cliX);
 		
 		ClientDtoFull cliY = new ClientDtoFull(null,"axelle","Aire");
 		cliY.getComptes().add(new CompteDto(null,"compte_C",60.0));
 		cliY.getComptes().add(new CompteDto(null,"compte_D",160.0));
 		cliY = clientService.createFull(cliY); 
 		
-	}
+	}*/
 
 }

@@ -59,6 +59,7 @@ public class ClientServiceImpl
 				Compte compteEntity= MyGenericMapper.map(cptDto,Compte.class);
 				compteEntity.setClient(entityCli);
 				compteRepository.save(compteEntity);
+				cptDto.setId(compteEntity.getId());
 			}
 		
 		return clientDtoFull;
